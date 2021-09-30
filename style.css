@@ -1,0 +1,424 @@
+/* || Fonts || */
+@import url("https://fonts.googleapis.com/css2?family=Barlow&family=Manrope&display=swap");
+@font-face {
+  font-family: bauhaus;
+  src: url("./assets/fonts/Bauhas/BauhausHeavyBT.woff") format("woff"),
+    url("./assets/fonts/Bauhas/BauhausHeavyBT.woff2") format("woff2");
+}
+
+/* || Color & Font Variables || */
+:root {
+  --primary-color: hsl(268, 88%, 26%);
+  --text-color-1: hsl(282, 84%, 41%);
+  --text-color-2: hsl(263, 84%, 63%);
+  --block-bg: hsl(281, 100%, 94%);
+  --white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --gradient: hsl(263, 84%, 63%) 0%, hsl(290, 100%, 50%) 60%;
+
+  --selection-bg: hsl(198, 100%, 93%);
+  --select-text: hsla(198, 100%, 46%, 0.871);
+
+  --font-family-1: "Manrope", sans-serif;
+  --font-family-2: "Barlow", sans-serif;
+  --font-family-3: bauhaus;
+}
+
+/* || CSS Reset || */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-family: var(--font-family-1);
+}
+
+/* || Main Container || */
+body {
+  position: relative;
+}
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 1100px;
+  max-width: 85%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* || Common Head & Body Grid || */
+.head,
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+  gap: 2rem;
+}
+
+/* || 1. Head ||*/
+/* || 1.1 Logo || */
+.logo {
+  justify-self: flex-start;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.logo-title {
+  padding-left: 0.5rem;
+  text-transform: uppercase;
+}
+.logo-img {
+  flex: 0 0;
+  width: 75px;
+}
+
+/* || 1.2 Clock || */
+.head {
+  isolation: isolate;
+}
+.clock {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) min-content minmax(0, 1fr) min-content minmax(
+      0,
+      1fr
+    ) min-content minmax(0, 1fr);
+  column-gap: 0.3rem;
+  background-color: var(--white);
+  border-radius: 0.7rem;
+  padding: 1rem 0.5rem;
+}
+
+/* || Clock Steps || */
+.clock::before,
+.clock::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 17%;
+  border-radius: inherit;
+  background-color: hsl(0, 0%, 80%, 0.35);
+  z-index: -1;
+}
+.clock::after {
+  width: 80%;
+  top: 9%;
+  background-color: hsl(0, 0%, 80%, 0.8);
+}
+
+/* || Clock Blocks || */
+.clock-block {
+  display: grid;
+  place-items: center;
+  padding: 1rem 0.5rem;
+  border-radius: 0.3rem;
+  color: var(--text-color-1);
+}
+
+/* || Colon Between Hour:Minute:Second || */
+.clock-colon {
+  padding: 0;
+  font-weight: 900;
+  font-size: 2rem;
+  animation: pulse 1000ms infinite linear paused;
+}
+@keyframes pulse {
+  to {
+    opacity: 0;
+  }
+}
+
+/* || Clock Time & Text || */
+.clock-title,
+.clock-meridiem {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+.clock-title {
+  color: var(--primary-color);
+}
+.clock-time {
+  background-color: var(--block-bg);
+  font-size: 0.8rem;
+}
+.clock-time,
+.clock-meridiem {
+  font-family: var(--font-family-2);
+}
+.clock-hours,
+.clock-minutes,
+.clock-seconds,
+.block-text {
+  display: block;
+  text-align: center;
+  text-transform: capitalize;
+}
+.clock-hours,
+.clock-minutes,
+.clock-seconds {
+  font-size: 2rem;
+}
+.clock-meridiem {
+  background-image: linear-gradient(var(--gradient));
+  color: var(--white);
+}
+.clock-meridiem .clock-ampm {
+  font-weight: 900;
+}
+
+/* || 2. Body || */
+.body {
+  margin-top: 3rem;
+}
+
+/* || 2.1 Timer Selection Section || */
+.timer-select {
+  background-color: var(--white);
+  color: var(--primary-color);
+  border-radius: 1rem;
+}
+.timer-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1.5rem 1rem;
+  position: relative;
+}
+
+/* Time-Line Between Icons*/
+.timer-section:nth-child(1)::after,
+.timer-section:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  top: 70%;
+  left: 2.5ch;
+  height: 55%;
+  border: 1px solid hsl(0, 0%, 70%);
+  border-radius: 1rem;
+}
+
+/* || Timer Title & Icon || */
+.timer-title {
+  margin-left: -2.5%;
+  display: flex;
+  align-items: center;
+}
+.timer-icon {
+  width: 30px;
+}
+.timer-text {
+  font-size: 1.1rem;
+  padding: 0 0.3rem;
+  text-transform: capitalize;
+}
+
+/* || Select || */
+.select-box {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  border-radius: 0.3rem;
+}
+.options-container {
+  width: 100%;
+  height: 0;
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: all 500ms linear;
+  border-radius: inherit;
+  position: relative;
+  top: 2.5rem;
+  z-index: 1;
+}
+.options-container.active {
+  transform: scaleY(1);
+}
+.options-container .option,
+.selected {
+  background-color: var(--white);
+  color: var(--black);
+  width: 100%;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.options-container .option {
+  box-shadow: 3px 3px 3px 0 hsl(0, 0%, 0%, 0.4),
+    -3px 3px 3px 0 hsl(0, 0%, 0%, 0.3);
+}
+.selected {
+  border: 1px solid hsl(0, 0%, 0%, 0.2);
+  position: relative;
+  order: 0;
+  color: var(--primary-color);
+  border-radius: inherit;
+}
+.selected::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 20px;
+  background-image: url("./assets/icons/arrow.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  transition: all 500ms linear;
+}
+.options-container.active + .selected::after {
+  transform: rotate(180deg);
+  background-position: bottom center;
+}
+.options-container .option:hover {
+  background-color: var(--selection-bg);
+  color: var(--select-text);
+  outline-color: var(--select-text);
+}
+.options-container .option:nth-child(1):hover {
+  border-top-right-radius: 0.7rem;
+  border-top-left-radius: 0.7rem;
+}
+.options-container .option:nth-last-child(1):hover {
+  border-bottom-right-radius: 0.7rem;
+  border-bottom-left-radius: 0.7rem;
+}
+.option label {
+  cursor: pointer;
+  pointer-events: none;
+  width: 100%;
+}
+.option .radio {
+  display: none;
+}
+
+/* || Timer Notification || */
+.timer-notification {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 900;
+  font-family: var(--font-family-3);
+  text-transform: uppercase;
+  background-color: hsl(0, 0%, 100%, 0.3);
+  border-radius: 0.3rem;
+  margin: 1rem 0;
+  padding: 0.5rem 0.7rem;
+  transform-origin: top;
+  transition: 900ms transform linear;
+}
+.timer-notification.hide {
+  transform: scaleY(0);
+}
+
+/* || Timer Button || */
+.timer-btn {
+  display: inline-block;
+  padding: 1rem 5rem;
+  outline: none;
+  border: transparent;
+  border-radius: 0.3rem;
+  background-image: linear-gradient(to right, var(--gradient));
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: capitalize;
+  text-decoration: none;
+  cursor: pointer;
+}
+.timer-btn:hover {
+  background-image: linear-gradient(to left, var(--gradient));
+}
+
+/* || 2.2 Timer Image Section || */
+.time-image {
+  display: grid;
+  padding: 2rem;
+  background-color: var(--white);
+  border-radius: 2rem;
+}
+.image-text {
+  display: block;
+  align-self: flex-start;
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding-left: 1rem;
+  color: var(--text-color-2);
+  font-weight: 700;
+  font-family: var(--font-family-3);
+}
+.time-image img {
+  align-self: flex-end;
+  justify-self: center;
+  max-width: 90%;
+}
+
+/* StorySet Attribute */
+.attribute {
+  display: inline-block;
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  color: var(--block-bg);
+}
+.attribute a {
+  text-decoration: none;
+  outline: none;
+  border-bottom: 1px solid var(--white);
+  color: var(--white);
+  padding-right: 15px;
+  background-image: url("./assets/icons/ExternalLink.svg");
+  background-repeat: no-repeat;
+  background-size: 12px;
+  background-position: top right;
+}
+
+/* 3. Responsive Changes*/
+@media screen and (max-width: 850px) {
+  /* Changing Font-Size so UI is Adjusted */
+  html {
+    font-size: 14px;
+  }
+
+  /*
+    Absolute Position Having Problem in Mobile Devices.
+    So, on smaller devices Using margin: auto
+  */
+  .container {
+    position: static;
+    transform: none;
+    margin: 0 auto;
+    padding: 5rem 0;
+  }
+
+  /* Single Column Layout */
+  .head,
+  .body {
+    grid-template-columns: 1fr;
+  }
+  .logo {
+    justify-self: center;
+  }
+
+  /* Story Set Attribute */
+  .attribute {
+    position: relative;
+    left: 50%;
+  }
+}
+/* Lowering Font-Size for Mobile */
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 12px;
+  }
+}
